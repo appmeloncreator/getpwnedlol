@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You Got Trolled 😎</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 3rem;
+        }
+        #scrollingText {
+            font-size: 1.5rem;
+            white-space: pre-wrap;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            text-align: left;
+            line-height: 1.5;
+        }
+        @keyframes scrollDown {
+            from { top: 100%; }
+            to { top: -200%; }
+        }
+    </style>
+</head>
+<body>
+    <h1>get rekt kid1!1!1!!</h1>
+    <audio id="trollAudio" autoplay loop>
+        <source src="never-gonna-give-you-up-[earrape]-made-with-Voicemod.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div id="scrollingText">
+        <p>Collecting user data...</p>
+        <p id="ipInfo">Loading IP details... 🔍</p>
+    </div>
+
+    <script>
+        document.addEventListener("click", function() {
+            document.getElementById("trollAudio").play();
+        });
+
+        // Fetch real IP details
+        fetch('https://ipapi.co/json/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("ipInfo").innerHTML = `
+                    <p>IP Address: ${data.ip}</p>
+                    <p>City: ${data.city}</p>
+                    <p>Region: ${data.region}</p>
+                    <p>Country: ${data.country_name}</p>
+                    <p>ISP: ${data.org}</p>
+                    <p>Latitude: ${data.latitude}, Longitude: ${data.longitude}</p>
+                    <p>Device Info: ${navigator.userAgent}</p>
+                    <p>Warning: Your data has been logged! 💀</p>
+                `;
+                
+                // Start scrolling animation
+                document.getElementById("scrollingText").style.animation = "scrollDown 10s linear forwards";
+            })
+            .catch(error => {
+                document.getElementById("ipInfo").innerHTML = "Failed to retrieve IP details. 😢";
+            });
+    </script>
+</body>
+</html>
